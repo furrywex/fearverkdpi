@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FearverkDPI - Свободный интернет</title>
+    <style>
+        /* Базовые стили в духе Microsoft Fluent Design */
+        :root {
+            --bg-color: #0f0f0f;
+            --text-color: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent-color: #0078d4; /* Классический синий Microsoft */
+            --accent-hover: #106ebe;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            /* Мягкий градиентный фон */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 120, 212, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(92, 45, 145, 0.15), transparent 25%);
+            background-attachment: fixed;
+        }
+
+        /* Навигация */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .lang-switch select {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--card-border);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .lang-switch select option {
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Основной контейнер */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 20px 60px;
+        }
+
+        /* Плавные анимации */
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        /* Герой-секция */
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #ffffff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Кнопки */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 120, 212, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: var(--card-bg);
+            color: white;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* Секция с фичами */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Как это работает */
+        .how-it-works {
+            margin-top: 80px;
+            padding: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+        }
+
+        .how-it-works h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .how-it-works p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">FearverkDPI</div>
+        <div class="lang-switch">
+            <select id="langSelect" onchange="changeLanguage()">
+                <option value="ru">Русский</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="hero animate delay-1">
+            <h1 data-i18n="title">Скорость без ограничений</h1>
+            <p data-i18n="subtitle">Мощная утилита для прямого доступа к YouTube, Discord и Roblox. Без VPN, без чужих серверов, с твоим родным пингом.</p>
+            <div class="buttons">
+                <!-- Ссылку на релиз замени на свою актуальную -->
+                <a href="https://github.com/твой-ник/FearverkDPI/releases/latest" class="btn btn-primary" data-i18n="btn-download">Скачать утилиту</a>
+                <!-- Ссылка на сурс код и zip -->
+                <a href="https://github.com/твой-ник/FearverkDPI/archive/refs/heads/main.zip" class="btn btn-secondary" data-i18n="btn-source">Скачать исходный код (.zip)</a>
+            </div>
+        </section>
+
+        <section class="features animate delay-2">
+            <div class="card">
+                <h3 data-i18n="feat1-title">Твой трафик — твое дело</h3>
+                <p data-i18n="feat1-desc">Программа не перенаправляет данные в другие страны. Все происходит локально на твоем ПК, поэтому скорость загрузки остается максимальной.</p>
+            </div>
+            <div class="card">
+                <h3 data-i18n="feat2-title">Нулевая задержка</h3>
+                <p data-i18n="feat2-desc">Идеальное решение для геймеров. Голосовые каналы работают стабильно, а в играх нет скачков пинга, характерных для обычных прокси.</p>
+            </div>
+            <div class="card">
+                <h3 data-i18n="feat3-title">Продвинутый обход</h3>
+                <p data-i18n="feat3-desc">Инструмент делит пакеты на лету и обманывает сетевые фильтры. Провайдер видит шум, а ты смотришь видео в 4K без буферизации.</p>
+            </div>
+        </section>
+
+        <section class="how-it-works animate delay-3">
+            <h2 data-i18n="how-title">Как это работает?</h2>
+            <p data-i18n="how-desc1">Вместо того чтобы прятать трафик внутри медленного тоннеля, эта программа работает на уровне сетевого драйвера Windows (WinDivert). Она берет твои запросы к сайтам и мгновенно изменяет их структуру прямо перед отправкой в сеть.</p>
+            <p data-i18n="how-desc2">Блокирующее оборудование провайдера просто не успевает распознать, куда ты пытаешься зайти, и пропускает соединение. В результате ты получаешь прямой доступ к нужным сервисам так, как если бы никаких ограничений никогда не существовало.</p>
+            <p data-i18n="how-desc3">Инструмент имеет открытый исходный код, не содержит телеметрии и полностью прозрачен. Запустил один файл — и весь интернет снова твой.</p>
+        </section>
+    </div>
+
+    <script>
+        // Словарь переводов
+        const translations = {
+            ru: {
+                "title": "Скорость без ограничений",
+                "subtitle": "Мощная утилита для прямого доступа к YouTube, Discord и Roblox. Без VPN, без чужих серверов, с твоим родным пингом.",
+                "btn-download": "Скачать утилиту",
+                "btn-source": "Скачать исходный код (.zip)",
+                "feat1-title": "Твой трафик — твое дело",
+                "feat1-desc": "Программа не перенаправляет данные в другие страны. Все происходит локально на твоем ПК, поэтому скорость загрузки остается максимальной.",
+                "feat2-title": "Нулевая задержка",
+                "feat2-desc": "Идеальное решение для геймеров. Голосовые каналы работают стабильно, а в играх нет скачков пинга, характерных для обычных прокси.",
+                "feat3-title": "Продвинутый обход",
+                "feat3-desc": "Инструмент делит пакеты на лету и обманывает сетевые фильтры. Провайдер видит шум, а ты смотришь видео в 4K без буферизации.",
+                "how-title": "Как это работает?",
+                "how-desc1": "Вместо того чтобы прятать трафик внутри медленного тоннеля, эта программа работает на уровне сетевого драйвера Windows (WinDivert). Она берет твои запросы к сайтам и мгновенно изменяет их структуру прямо перед отправкой в сеть.",
+                "how-desc2": "Блокирующее оборудование провайдера просто не успевает распознать, куда ты пытаешься зайти, и пропускает соединение. В результате ты получаешь прямой доступ к нужным сервисам так, как если бы никаких ограничений никогда не существовало.",
+                "how-desc3": "Инструмент имеет открытый исходный код, не содержит телеметрии и полностью прозрачен. Запустил один файл — и весь интернет снова твой."
+            },
+            en: {
+                "title": "Speed Without Limits",
+                "subtitle": "A powerful utility for direct access to YouTube, Discord, and Roblox. No VPNs, no foreign servers, just your native ping.",
+                "btn-download": "Download Utility",
+                "btn-source": "Download Source Code (.zip)",
+                "feat1-title": "Your Traffic, Your Business",
+                "feat1-desc": "The program doesn't route your data through other countries. Everything happens locally on your PC, ensuring maximum download speeds.",
+                "feat2-title": "Zero Latency",
+                "feat2-desc": "The perfect solution for gamers. Voice channels work flawlessly, and games don't suffer from ping spikes common with standard proxies.",
+                "feat3-title": "Advanced Bypass",
+                "feat3-desc": "The tool fragments packets on the fly to bypass network filters. The ISP sees noise, while you watch 4K video without buffering.",
+                "how-title": "How does it work?",
+                "how-desc1": "Instead of hiding your traffic inside a slow tunnel, this program operates at the Windows network driver level (WinDivert). It takes your website requests and instantly modifies their structure right before they leave your network card.",
+                "how-desc2": "The ISP's blocking equipment simply can't recognize where you are trying to connect and lets the connection through. As a result, you get direct access to the services you need as if restrictions never existed.",
+                "how-desc3": "The tool is open-source, contains no telemetry, and is fully transparent. Run one file, and the entire internet is yours again."
+            }
+        };
+
+        // Функция смены языка
+        function changeLanguage() {
+            const lang = document.getElementById('langSelect').value;
+            const elements = document.querySelectorAll('[data-i18n]');
+            
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+    </script>
+</body>
+</html>
