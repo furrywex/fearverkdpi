@@ -11,7 +11,7 @@
 [![Speed](https://img.shields.io/badge/Speed-100%25%20Direct%20Line-brightgreen.svg?style=for-the-badge)](#)
 
 [English](#-english) • [Русский](#-русский)
-
+ 
 </div>
 
 ---
@@ -20,6 +20,8 @@
 
 ### 📖 Overview
 **FearverkDPI** is a native, low-latency DPI circumvention engine written in modern C++ utilizing the `WinDivert` kernel architecture. Unlike conventional VPNs, FearverkDPI **does not** route your traffic through remote relays. It manipulates local raw packet streams on the fly by fragmenting TLS SNI buffers, dropping HTTP/3 QUIC (UDP 443) streams, and injecting desynchronized low-TTL fake TCP packets.
+
+### Don't forget about our site! https://furrywex.github.io/fearverkdpi
 
 ### ✨ Key Features
 * 🚀 **Zero Latency & 100% Bandwidth:** Pure ISP wire speed without proxy latency or bandwidth throttling.
@@ -104,6 +106,8 @@ g++ -std=c++17 -O3 src/FearverkDPI.cpp -o bin/FearverkDPI.exe -Ilibs -Llibs -lWi
 3. Запустите файл **`general.bat`** (или профиль нужной страны) **от имени Администратора**.
 4. Готово! YouTube, Discord и Roblox снова работают на полной скорости.
 
+---
+### Не забывайте о нашем сайте! https://furrywex.github.io/fearverkdpi
 ---
 
 ### 📜 Профили запуска (.bat)
